@@ -1,0 +1,217 @@
+{
+	"info": {
+		"_postman_id": "560eaf73-56e6-4dfa-90f0-aa584d579983",
+		"name": "prueba-tecnica",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24581890"
+	},
+	"item": [
+		{
+			"name": "Listar todos los equipos",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/equipos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"equipos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar por id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNzM2ODA3MjMyLCJleHAiOjE3MzY4MTA4MzJ9.9oqkgMyLyO6YL4Ug3zCEZc2shq3eUVfWGM3cCr8neeI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/equipos/23",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"equipos",
+						"23"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar equipo por nombre",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Equipo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\":\"Boca Juniors\",\r\n  \"liga\": \"Liga Argentina\",\r\n  \"pais\": \"Argentina\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/equipos",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"equipos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar equipo",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombre\": \"Villareal\",\r\n  \"liga\": \"La Liga\",\r\n  \"pais\": \"España\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/equipos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"equipos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar equipo",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/equipos/25",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"equipos",
+						"25"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Jwt token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {\r",
+							"    var jsonResponse = pm.response.json();\r",
+							"    pm.environment.set(\"token\", jsonResponse.token);\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"test\",\r\n    \"password\":\"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "das"
+		}
+	]
+}
